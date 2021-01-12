@@ -743,7 +743,7 @@ export class AppComponent implements OnInit {
         //   mapConfig();
           modalInit();
           searchInit();
-          countDown();
+        //   countDown();
           mainSlider();
           parallax();
         //   stickySidebar();

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../../services/products.service';
 
 import { OwlCarouselConfig, CarouselNavigation,
-         SlickConfig, ProductLightbox } from '../../../functions';
+         SlickConfig, ProductLightbox, CountDown } from '../../../functions';
 
 declare const $: any;
 declare const jQuery: any;
@@ -81,6 +81,17 @@ export class HomeHotTodayComponent implements OnInit {
       const galleryMix_2 = $('.galleryMix_2');
       const galleryMix_3 = $('.galleryMix_3');
 
+        // Seleccionar del DOM los elementos de la oferta
+
+        const offer_1 = $('.offer_1');
+        const offer_2 = $('.offer_2');
+        const offer_3 = $('.offer_3');
+  
+        // Seleccionar del DOM los elementos de las reseñas
+        const review_1 = $('.review_1');
+        const review_2 = $('.review_2');
+        const review_3 = $('.review_3');
+
       // Recorrer todos los indices de productos
       for (let i = 0; i < galleryMix_1.length; i++ ) {
 
@@ -104,22 +115,6 @@ export class HomeHotTodayComponent implements OnInit {
 
         }
 
-      }
-
-      // Ejecturar funcoines globales con respecto a la galería mixta
-      OwlCarouselConfig.fnc();
-      CarouselNavigation.fnc();
-      SlickConfig.fnc();
-      ProductLightbox.fnc();
-
-      // Seleccionar del DOM los elementos de la oferta
-
-      const offer_1 = $('.offer_1');
-      const offer_2 = $('.offer_2');
-      const offer_3 = $('.offer_3');
-
-      // Recorrer todos los indices de productos
-      for ( let i = 0; i < offer_1.length; i++ ) {
         // Capturamos el array de ofertas de ada producto
         let offer = JSON.parse($(offer_1[i]).attr('offer'));
 
@@ -147,7 +142,26 @@ export class HomeHotTodayComponent implements OnInit {
               );
         }
 
+        // Fecha del contador
+        $(offer_3[i]).attr('data-time',
+              new Date( parseInt(offer[2].split('-')[0]),
+                  parseInt(offer[2].split('-')[1]) -1,
+                  parseInt(offer[2].split('-')[2]) )
+        
+        );
+
+        // Calculamos el total de las calificaciones de las reseñas
+        let totalReview = 0;
+
       }
+
+      // Ejecturar funcoines globales con respecto a la galería mixta
+      OwlCarouselConfig.fnc();
+      CarouselNavigation.fnc();
+      SlickConfig.fnc();
+      ProductLightbox.fnc();
+       // Ejecutar funciones globales con respecto a las ofertas
+       CountDown.fnc();
 
     }
 
